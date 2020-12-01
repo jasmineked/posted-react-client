@@ -3,12 +3,12 @@ import { withRouter, Redirect } from 'react-router-dom'
 
 // import { create } from '../../api/upload'
 // import messages from '../AutoDismissAlert/messages'
-import axios from 'axios'
-import apiUrl from '../../apiConfig'
+// import axios from 'axios'
+// import apiUrl from '../../apiConfig'
 // import { createUpload } from '../../api/upload'
 
-// import Form from 'react-bootstrap/Form'
-// import Button from 'react-bootstrap/Button'
+import Form from 'react-bootstrap/Form'
+import Button from 'react-bootstrap/Button'
 
 // const CreateUpload = props => {
 //   const [upload, setUpload] = useState({ name: '', tag: '' })
@@ -58,25 +58,32 @@ import apiUrl from '../../apiConfig'
 //     </div>
 //   )
 // }
+import { createUpload } from '../../api/upload'
 
 class CreateUpload extends Component {
   constructor (props) {
     super(props)
-    console.log(props)
     this.state = {
       upload: {
         name: '',
-        tag: ''
+        tag: '',
+        upload: ''
       },
       createdId: null
     }
   }
   handleInputChange = (event, props) => {
     event.persist()
-    console.log(props)
     this.setState(prevState => {
-      const updatedField = {
-        [event.target.name]: event.target.value
+      let updatedField
+      if (event.target.name === 'upload') {
+        updatedField = {
+          [event.target.name]: event.target.files[0]
+        }
+      } else {
+        updatedField = {
+          [event.target.name]: event.target.value
+        }
       }
       const updatedData = Object.assign({}, prevState.upload, updatedField)
       return { upload: updatedData }
@@ -84,12 +91,14 @@ class CreateUpload extends Component {
   }
   handleSubmit = (event) => {
     event.preventDefault()
-    console.log(this.state.upload)
-    axios({
-      url: `${apiUrl}/uploads`,
-      method: 'POST',
-      data: { upload: this.state.upload }
-    })
+    console.log('this.props.user: ', this.props.user)
+    console.log(this.state)
+    // axios({
+    //   url: `${apiUrl}/uploads`,
+    //   method: 'POST',
+    //   data: { upload: this.state.upload }
+    // })
+    createUpload(this.props.user)
       .then(res => {
         this.setState({ createdId: res.data.upload._id })
       })
@@ -102,7 +111,7 @@ class CreateUpload extends Component {
     return (
       <div>
         <h1>Create File</h1>
-        <form onSubmit={this.handleSubmit}>
+        <Form onSubmit={this.handleSubmit}>
           <label> File Name </label>
           <input
             placeholder="File Name"
@@ -116,8 +125,9 @@ class CreateUpload extends Component {
             name="tag"
             onChange={this.handleInputChange}
           />
-          <button type="submit">Submit</button>
-        </form>
+          <Form.File id="upload-file-input" label="Upload File Here" name="upload" onChange={this.handleInputChange} />
+          <Button type="submit">Submit</Button>
+        </Form>
       </div>
     )
   }
