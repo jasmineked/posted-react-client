@@ -6,7 +6,6 @@ import { createUpload } from '../../api/upload'
 class CreateUpload extends Component {
   constructor (props) {
     super(props)
-    console.log(props)
     this.state = {
       form: {
         upload: '',
@@ -17,7 +16,6 @@ class CreateUpload extends Component {
   }
   handleInputChange = (event, props) => {
     event.persist()
-    console.log(props)
     this.setState(prevState => {
       let updatedField
       if (event.target.name === 'upload') {
