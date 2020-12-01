@@ -23,6 +23,8 @@ class App extends Component {
   setUser = user => this.setState({ user })
 
   clearUser = () => this.setState({ user: null })
+  setSelected = selected => this.setState(null)
+  setUploaded = uploaded => this.setState({})
 
   deleteAlert = (id) => {
     this.setState((state) => {
