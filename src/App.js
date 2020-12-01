@@ -10,6 +10,7 @@ import SignIn from './components/SignIn/SignIn'
 import SignOut from './components/SignOut/SignOut'
 import ChangePassword from './components/ChangePassword/ChangePassword'
 import CreateUpload from './components/Create/Create'
+import UploadIndex from './components/Index/Index'
 
 class App extends Component {
   constructor () {
@@ -70,6 +71,9 @@ class App extends Component {
           )} />
           <Route user={user} path='/uploads' render={() => (
             <CreateUpload msgAlert={this.msgAlert} user={user} />
+          )} />
+          <Route user={user} path="/uploadindex" render={() => (
+            <UploadIndex msgAlert={this.msgAlert} user={user} />
           )} />
         </main>
       </Fragment>
