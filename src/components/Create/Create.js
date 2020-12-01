@@ -5,6 +5,7 @@ import { withRouter, Redirect } from 'react-router-dom'
 // import messages from '../AutoDismissAlert/messages'
 import axios from 'axios'
 import apiUrl from '../../apiConfig'
+// import { createUpload } from '../../api/upload'
 
 // import Form from 'react-bootstrap/Form'
 // import Button from 'react-bootstrap/Button'
@@ -59,9 +60,9 @@ import apiUrl from '../../apiConfig'
 // }
 
 class CreateUpload extends Component {
-  constructor () {
-    super()
-
+  constructor (props) {
+    super(props)
+    console.log(props)
     this.state = {
       upload: {
         name: '',
@@ -70,9 +71,9 @@ class CreateUpload extends Component {
       createdId: null
     }
   }
-  handleInputChange = (event) => {
+  handleInputChange = (event, props) => {
     event.persist()
-
+    console.log(props)
     this.setState(prevState => {
       const updatedField = {
         [event.target.name]: event.target.value
@@ -83,7 +84,7 @@ class CreateUpload extends Component {
   }
   handleSubmit = (event) => {
     event.preventDefault()
-
+    console.log(this.state.upload)
     axios({
       url: `${apiUrl}/uploads`,
       method: 'POST',
