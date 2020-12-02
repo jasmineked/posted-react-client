@@ -27,12 +27,12 @@ class UploadIndex extends React.Component {
       .catch(console.error)
   }
 
-  onDeleteUpload = (event) => {
+  onDeleteUpload = () => {
     event.preventDefault()
     const { msgAlert, history, user } = this.props
-    const data = new FormData()
+    // const data = new FormData()
 
-    deleteUpload(data, user)
+    deleteUpload(user)
       .then(res => {
         this.setState({ deleted: true })
       })
@@ -61,7 +61,7 @@ class UploadIndex extends React.Component {
         <ul>
           {this.state.uploads.map(upload => {
             return <li key={upload._id}>{upload.name} {upload.tag}
-              {upload.upload} <button onClick={this.onDeleteUpload}>Delete File</button>
+              {upload.upload} <button onClick={() => this.onDeleteUpload(upload.id)}>Delete File</button>
             </li>
           })}
         </ul>
