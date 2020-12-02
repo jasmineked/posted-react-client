@@ -14,6 +14,16 @@ export const createUpload = (data, user) => {
   })
 }
 // UPDATE
+export const updateMetaData = (data, user) => {
+  return axios({
+    url: apiUrl + '/update',
+    method: 'PATCH',
+    headers: {
+      'Authorization': `Token token=${user.token}`
+    },
+    data: data
+  })
+}
 
 // DELETE
 export const deleteUpload = (data, user) => {

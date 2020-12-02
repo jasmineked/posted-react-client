@@ -37,7 +37,8 @@ class UploadIndex extends React.Component {
       jsx = (
         <ul>
           {this.state.uploads.map(upload => {
-            return <li key={upload._id}><Link to={`/uploads/${upload._id}`}>{upload.name} {upload.tag} {upload.upload}</Link></li>
+            console.log('uploads: ', this.state.uploads)
+            return <li key={upload._id}><Link to={`/uploadindex/${upload._id}`}>{upload.name} {upload.tag}</Link></li>
           })}
         </ul>
       )
