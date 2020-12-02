@@ -18,9 +18,10 @@ class UploadIndex extends React.Component {
     // axios.get(apiUrl + '/uploads')
     indexUploads(this.props.user)
       .then(response => {
+        console.log('response: ', response)
         this.setState({
           isLoaded: true,
-          uploads: response.data.uploads
+          uploads: response.data.files
         })
       })
       .catch(console.error)
@@ -36,7 +37,7 @@ class UploadIndex extends React.Component {
       jsx = (
         <ul>
           {this.state.uploads.map(upload => {
-            return <li key={upload._id}><Link to={`/uploads/${upload._id}`}>{upload.name}</Link></li>
+            return <li key={upload._id}><Link to={`/uploads/${upload._id}`}>{upload.name} {upload.tag} {upload.upload}</Link></li>
           })}
         </ul>
       )
