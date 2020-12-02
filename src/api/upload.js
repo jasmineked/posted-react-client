@@ -15,6 +15,15 @@ export const createUpload = user => {
 // UPDATE
 
 // DELETE
+export const deleteUpload = (data, user) => {
+  return axios({
+    url: apiUrl + '/uploads',
+    method: 'DELETE',
+    headers: {
+      'Authorization': `Token token=${user.token}`
+    }
+  })
+}
 
 // INDEX
 
