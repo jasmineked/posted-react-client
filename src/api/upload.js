@@ -2,14 +2,15 @@ import apiUrl from '../apiConfig'
 import axios from 'axios'
 
 // CREATE
-export const createUpload = user => {
+export const createUpload = (data, user) => {
   // console.log(upload)
   return axios({
     method: 'POST',
     url: apiUrl + '/uploads',
     headers: {
       'Authorization': `Token token=${user.token}`
-    }
+    },
+    data: data
   })
 }
 // UPDATE
