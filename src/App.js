@@ -75,6 +75,9 @@ class App extends Component {
           <Route user={user} path="/uploadindex" render={() => (
             <UploadIndex msgAlert={this.msgAlert} user={user} />
           )} />
+          <Route user={user} path="/uploadindex/:id" render={() => (
+            <UploadIndex msgAlert={this.msgAlert} user={user} />
+          )} />
         </main>
       </Fragment>
     )

@@ -17,6 +17,7 @@ export const createUpload = (data, user) => {
 
 // DELETE
 export const deleteUpload = (data, user) => {
+  console.log(data)
   return axios({
     url: apiUrl + '/uploads',
     method: 'DELETE',
@@ -27,7 +28,6 @@ export const deleteUpload = (data, user) => {
 }
 
 // INDEX
-
 export const indexUploads = user => {
   return axios({
     method: 'GET',
@@ -37,3 +37,14 @@ export const indexUploads = user => {
     }
   })
 }
+
+// SHOW
+// export const showUpload = (data, user) => {
+//   return axios({
+//     method: 'GET',
+//     url: apiUrl + '/uploads/' + data.upload._id,
+//     headers: {
+//       'Authorization': `Token token=${user.token}`
+//     }
+//   })
+// }
