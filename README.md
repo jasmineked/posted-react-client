@@ -42,7 +42,7 @@ Building a file storage app that allows user upload/view/edit/delete files
 - [Project Front End Repo](https://github.com/CJNJC/project3-react-client)
 - [Project Back End Repo](https://github.com/CJNJC/project3-api)
 - [Deployed API](https://safe-eyrie-19741.herokuapp.com/uploads)
-- [Deployed Client](https://CJNJC/github.io)
+- [Deployed Client](https://CJNJC/github.io/project3-react-client)
 
 ### Technologies Used
 
