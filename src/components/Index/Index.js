@@ -1,9 +1,8 @@
-
 import React from 'react'
-import { Link } from 'react-router-dom'
+// import { Link } from 'react-router-dom'
 // import axios from 'axios'
 // import apiUrl from '../../apiConfig'
-import { indexUploads } from '../../api/upload'
+import { indexUploads, deleteUpload } from '../../api/upload'
 
 class UploadIndex extends React.Component {
   constructor (props) {
@@ -11,7 +10,8 @@ class UploadIndex extends React.Component {
 
     this.state = {
       uploads: [],
-      isLoaded: false
+      isLoaded: false,
+      deleted: false
     }
   }
   componentDidMount () {
@@ -26,6 +26,29 @@ class UploadIndex extends React.Component {
       })
       .catch(console.error)
   }
+
+  onDeleteUpload = (event) => {
+    event.preventDefault()
+    const { msgAlert, history, user } = this.props
+    const data = new FormData()
+
+    deleteUpload(data, user)
+      .then(res => {
+        this.setState({ deleted: true })
+      })
+      .then(() => msgAlert({
+        heading: 'Successfully Deleted',
+        message: 'File Delete Success',
+        variant: 'success'
+      }))
+      .then(() => history.push('/'))
+    // axios.delete(apiUrl + '/uploads/' + this.props.match.params.id)
+      .then(res => {
+        this.setState({ deleted: true })
+      })
+    //   .catch(console.error)
+  }
+
   render () {
     let jsx
     if (this.state.isLoaded === false) {
@@ -37,7 +60,9 @@ class UploadIndex extends React.Component {
       jsx = (
         <ul>
           {this.state.uploads.map(upload => {
-            return <li key={upload._id}><Link to={`/uploads/${upload._id}`}>{upload.name} {upload.tag} {upload.upload}</Link></li>
+            return <li key={upload._id}>{upload.name} {upload.tag}
+              {upload.upload} <button onClick={this.onDeleteUpload}>Delete File</button>
+            </li>
           })}
         </ul>
       )
