@@ -8,6 +8,7 @@ const authenticatedOptions = (
     <Nav.Link href="#sign-out">Sign Out</Nav.Link>
     <Nav.Link href="#uploads">Create Uploads</Nav.Link>
     <Nav.Link href="#uploadindex">Index Uploads</Nav.Link>
+    <Nav.Link href="#update">Update Uploads</Nav.Link>
   </Fragment>
 )
 

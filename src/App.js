@@ -11,6 +11,7 @@ import SignOut from './components/SignOut/SignOut'
 import ChangePassword from './components/ChangePassword/ChangePassword'
 import CreateUpload from './components/Create/Create'
 import UploadIndex from './components/Index/Index'
+import UpdateMeta from './components/Update/Update'
 
 class App extends Component {
   constructor () {
@@ -74,6 +75,9 @@ class App extends Component {
           )} />
           <Route user={user} path="/uploadindex" render={() => (
             <UploadIndex msgAlert={this.msgAlert} user={user} />
+          )} />
+          <Route user={user} path="/update" render={() => (
+            <UpdateMeta msgAlert={this.msgAlert} user={user} />
           )} />
         </main>
       </Fragment>
