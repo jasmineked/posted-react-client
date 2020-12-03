@@ -16,10 +16,10 @@ export const createUpload = (data, user) => {
 // UPDATE
 
 // DELETE
-export const deleteUpload = (data, user) => {
-  console.log(data)
+export const deleteUpload = (user) => {
+  console.log('happening')
   return axios({
-    url: apiUrl + '/uploads',
+    url: apiUrl + '/uploads' + this.props.match.params.id,
     method: 'DELETE',
     headers: {
       'Authorization': `Token token=${user.token}`
@@ -39,12 +39,12 @@ export const indexUploads = user => {
 }
 
 // SHOW
-// export const showUpload = (data, user) => {
-//   return axios({
-//     method: 'GET',
-//     url: apiUrl + '/uploads/' + data.upload._id,
-//     headers: {
-//       'Authorization': `Token token=${user.token}`
-//     }
-//   })
-// }
+export const updateUpload = user => {
+  return axios({
+    method: 'PATCH',
+    url: apiUrl + '/uploads',
+    headers: {
+      'Authorization': `Token token=${user.token}`
+    }
+  })
+}

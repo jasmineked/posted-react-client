@@ -29,11 +29,11 @@ class SignIn extends Component {
     signIn(this.state)
       .then(res => setUser(res.data.user))
       .then(() => msgAlert({
-        heading: 'Sign In Success',
+        heading: 'Hello' + ' ' + this.state.email,
         message: messages.signInSuccess,
         variant: 'success'
       }))
-      .then(() => history.push('/'))
+      .then(() => history.push('/home'))
       .catch(error => {
         this.setState({ email: '', password: '' })
         msgAlert({
