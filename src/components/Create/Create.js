@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { withRouter, Redirect } from 'react-router-dom'
 import Form from 'react-bootstrap/Form'
 import { createUpload } from '../../api/upload'
+import Button from 'react-bootstrap/Button'
 
 class CreateUpload extends Component {
   constructor (props) {
@@ -33,20 +34,31 @@ class CreateUpload extends Component {
   }
   onCreateUpload = (event) => {
     event.preventDefault()
+    // Create and empty formdata object
     const data = new FormData()
+    // taking the data from the component state
+    // and append it to the data formdata object
     data.append('name', this.state.form.name)
     data.append('tag', this.state.form.tag)
     data.append('upload', this.state.form.upload)
+    // getting user from the props
     const { msgAlert, history, user } = this.props
 
+    // Pass user and data to createUpload
     createUpload(data, user)
       // .then(res => setUploaded(res.data.setUpload))
-      .then(() => msgAlert({
-        heading: 'Successfully Posted',
-        message: 'Create Upload Success',
-        variant: 'success'
-      }))
-      .then(() => history.push('/'))
+      .then((response) => {
+        console.log('this is response', response)
+        return msgAlert({
+          heading: 'Successfully Posted',
+          message: 'Uploaded File:' + ' ' + response.data.upload.name,
+          variant: 'success'
+        })
+      })
+      // "history" = where the user has been
+      // history.push = Go to 'here'
+      // .then(() => history.push('/'))
+      .then(() => history.push('/home'))
       // .then(res => {
       //   this.setState({ createdId: res.data.upload._id })
       // })
@@ -76,23 +88,26 @@ class CreateUpload extends Component {
     return (
       <div>
         <h1>Create File</h1>
-        <form onSubmit={this.onCreateUpload}>
+        <Form onSubmit={this.onCreateUpload}>
           <label> File Name </label>
-          <input
+          <input className="form-control"
             placeholder="File Name"
             value={this.state.form.name}
             name="name"
             onChange={this.handleInputChange}
           />
-          <input
+          <label> File Tag </label>
+          <input className="form-control"
             placeholder="File Tag"
             value={this.state.form.tag}
             name="tag"
             onChange={this.handleInputChange}
           />
-          <Form.File id="upload-file-input" label="Upload File Here" name="upload" onChange={this.handleInputChange}/>
-          <button type="submit">Submit</button>
-        </form>
+          <br/>
+          <Form.File id="upload-file-input" name="upload" onChange={this.handleInputChange}/>
+          <br/>
+          <Button type="submit">Submit</Button>
+        </Form>
       </div>
     )
   }
