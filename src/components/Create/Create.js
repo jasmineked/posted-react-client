@@ -46,7 +46,6 @@ class CreateUpload extends Component {
 
     // Pass user and data to createUpload
     createUpload(data, user)
-      // .then(res => setUploaded(res.data.setUpload))
       .then((response) => {
         console.log('this is response', response)
         return msgAlert({
@@ -84,6 +83,7 @@ class CreateUpload extends Component {
   render () {
     if (this.state.createdID) {
       return <Redirect to={`/uploads/${this.state.createdID}`}/>
+      // return <Redirect to='/home'/>
     }
     return (
       <div>

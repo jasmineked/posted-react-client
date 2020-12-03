@@ -11,7 +11,7 @@ import SignOut from './components/SignOut/SignOut'
 import ChangePassword from './components/ChangePassword/ChangePassword'
 import CreateUpload from './components/Create/Create'
 import IndexUploads from './components/Index/Index'
-import UpdateUpload from './components/Update/Update'
+import ShowUpload from './components/Show/Show'
 
 class App extends Component {
   constructor () {
@@ -70,14 +70,14 @@ class App extends Component {
           <AuthenticatedRoute user={user} path='/change-password' render={() => (
             <ChangePassword msgAlert={this.msgAlert} user={user} />
           )} />
-          <Route user={user} path='/uploads' render={() => (
+          <AuthenticatedRoute user={user} exact path='/uploads' render={() => (
             <CreateUpload msgAlert={this.msgAlert} user={user} />
           )} />
-          <AuthenticatedRoute user={user} path="/home" render={() => (
+          <AuthenticatedRoute user={user} path='/home' render={() => (
             <IndexUploads msgAlert={this.msgAlert} user={user} />
           )} />
-          <Route user={user} path="/home/:id" render={() => (
-            <UpdateUpload msgAlert={this.msgAlert} user={user} />
+          <AuthenticatedRoute user={user} path='/uploads/:id' render={() => (
+            <ShowUpload msgAlert={this.msgAlert} user={user} />
           )} />
         </main>
       </Fragment>
