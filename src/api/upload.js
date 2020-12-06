@@ -14,10 +14,10 @@ export const createUpload = (data, user) => {
   })
 }
 // UPDATE
-export const updateUpload = (data, user) => {
+export const updateUpload = (data, user, id) => {
   return axios({
-    method: 'PATCH',
-    url: apiUrl + '/uploads/',
+    method: 'POST',
+    url: apiUrl + '/uploads/' + id,
     headers: {
       Authorization: `Token token=${user.token}`
     },
@@ -25,10 +25,10 @@ export const updateUpload = (data, user) => {
   })
 }
 // DELETE
-export const deleteUpload = (data, user) => {
+export const deleteUpload = (user, id) => {
   console.log('happening')
   return axios({
-    url: apiUrl + '/uploads',
+    url: apiUrl + '/uploads/' + id,
     method: 'DELETE',
     headers: {
       'Authorization': `Token token=${user.token}`
@@ -48,10 +48,10 @@ export const indexUploads = user => {
 }
 
 // SHOW
-export const showUpload = user => {
+export const showUpload = (user, id) => {
   return axios({
     method: 'GET',
-    url: apiUrl + '/uploads',
+    url: apiUrl + '/uploads/' + id,
     headers: {
       'Authorization': `Token token=${user.token}`
     }
