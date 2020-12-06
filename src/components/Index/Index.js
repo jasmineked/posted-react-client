@@ -83,6 +83,7 @@ class IndexUpload extends React.Component {
             <table className="table table-sm table-hover">
               <thead>
                 <tr>
+                  <th scope="col">#</th>
                   <th scope="col">File Preview</th>
                   <th scope="col">File Name</th>
                   <th scope="col">Owner</th>
@@ -96,13 +97,14 @@ class IndexUpload extends React.Component {
               <tbody>{this.state.uploads.map((upload, index) => {
                 return (
                   <tr key={upload._id} id="hov">
+                    <td>{index + 1}</td>
                     <td>{(upload.url && (upload.url.includes('jpg') || upload.url.includes('png'))) ? <img src={upload.url} width={50} /> : ''}</td>
                     <td onClick={() => history.push('/uploads/' + upload._id)}>{upload.name}</td>
-                    <td onClick={() => history.push('/uploads/' + upload._id)}>{upload.owner}</td>
-                    <td onClick={() => history.push('/uploads/' + upload._id)}>{upload.tag}</td>
-                    <td onClick={() => history.push('/uploads/' + upload._id)}>{upload.createdAt}</td>
-                    <td onClick={() => history.push('/uploads/' + upload._id)}>{upload.updatedAt}</td>
-                    <td onClick={() => history.push('/uploads/' + upload._id)}><a href={upload.url} target="_blank" rel="noreferrer">{upload.url}</a></td>
+                    <td>{upload.owner}</td>
+                    <td>{upload.tag}</td>
+                    <td>{upload.createdAt}</td>
+                    <td>{upload.updatedAt}</td>
+                    <td><a href={upload.url} target="_blank" rel="noreferrer">{upload.url}</a></td>
                   </tr>
                 )
               })

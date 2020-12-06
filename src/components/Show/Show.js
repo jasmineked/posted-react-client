@@ -1,11 +1,14 @@
 import React, { Component } from 'react'
-import { Redirect } from 'react-router-dom'
+// import { Redirect } from 'react-router-dom'
 import { withRouter } from 'react-router'
 
 // import axios from 'axios'
 // import apiUrl from '../../apiConfig'
-import { showUpload, deleteUpload } from '../../api/upload'
+import { deleteUpload, showUpload, updateUpload } from '../../api/upload'
 import Button from 'react-bootstrap/Button'
+import Form from 'react-bootstrap/Form'
+
+// import Form from 'react-bootstrap/Form'
 
 class ShowUpload extends Component {
   constructor (props) {
@@ -13,25 +16,46 @@ class ShowUpload extends Component {
 
     // this.deleteUpload = this.deleteUpload.bind(this)
     this.state = {
-      upload: null,
+      form: {
+        name: '',
+        tag: '',
+        _id: ''
+      },
       deleted: false
     }
   }
 
   componentDidMount () {
-    showUpload(this.props.user)
-      .then(res => {
-        this.setState({ upload: res.data.file })
+    showUpload(this.props.user, this.props.match.params.id)
+      .then(response => {
+        this.setState(prevState => {
+          console.log('what is response.data is', response.data)
+          const updatedData = Object.assign({}, prevState.form, response.data.file)
+          return { form: updatedData }
+        })
       })
       .catch(console.error)
+  }
+  handleInputChange = (event, props) => {
+    event.persist()
+    console.log('event.target.value/name', event.target.name, event.target.value)
+    this.setState(prevState => {
+      const updatedField = {
+        [event.target.name]: event.target.value
+      }
+
+      const updatedData = Object.assign({}, prevState.form, updatedField)
+      return { form: updatedData }
+    })
   }
 
   onDeleteUpload = (event) => {
     // event.preventDefault()
     const { msgAlert, history, user } = this.props
-    // const data = new FormData()
+    const { _id } = this.state.form
 
-    deleteUpload(user)
+    console.log('this is id', _id)
+    deleteUpload(user, _id)
       .then(console.log)
       .then(res => {
         this.setState({ deleted: true })
@@ -41,7 +65,41 @@ class ShowUpload extends Component {
         message: 'File Delete Success',
         variant: 'success'
       }))
-      .then(() => history.push('/'))
+      .then(() => history.push('/home'))
+      .catch(error => {
+        msgAlert({
+          heading: 'Delete Failed with error: ' + error.message,
+          message: 'Delete failed',
+          variant: 'danger'
+        })
+      })
+    // const data = new FormData()
+  }
+
+  onUpdateUpload = (event) => {
+    event.preventDefault()
+    // Create and empty formdata object
+    const data = new FormData()
+    // taking the data from the component state
+    // and append it to the data formdata object
+    console.log('state.form', this.state.form)
+    data.append('name', this.state.form.name)
+    data.append('tag', this.state.form.tag)
+
+    const { msgAlert, history, user } = this.props
+    const { _id } = this.state.form
+    console.log('this is data', data)
+
+    updateUpload(data, user, _id)
+      .then((response) => {
+        console.log('this is response', response)
+        return msgAlert({
+          heading: 'Successfully Updated',
+          message: 'Updated File:' + ' ' + response.data.name,
+          variant: 'success'
+        })
+      })
+      .then(() => history.push('/home'))
       .catch(console.error)
   }
   //
@@ -56,22 +114,36 @@ class ShowUpload extends Component {
   //   this.setState({ deleted: true })
   // })
   // .catch(console.error)
-
   render () {
     return (
       <div>
-        {this.state.deleted && (
-          <Redirect to="/home" />
-        )}
         <h1>Update/Delete Page</h1>
-
-        <Button onClick={this.onDeleteUpload}>Delete</Button>
-        {this.state.upload && (
+        {this.state.form && (
           <div>
-            <h2>file name {this.state.upload.name}</h2>
-            <p>file tag {this.state.upload.tag}</p>
+            <h2>File: {this.state.form.name}</h2>
+            <h2>Tag: {this.state.form.tag}</h2>
           </div>
         )}
+        <h1>Update File</h1>
+        <Form onSubmit={this.onUpdateUpload}>
+          <label> File Name </label>
+          <input className="form-control"
+            placeholder="File Name"
+            value={this.state.form.name}
+            name="name"
+            onChange={this.handleInputChange}
+          />
+          <label> File Tag </label>
+          <input className="form-control"
+            placeholder="File Tag"
+            value={this.state.form.tag}
+            name="tag"
+            onChange={this.handleInputChange}
+          />
+          <br/>
+          <Button type="submit">Submit</Button>
+        </Form>
+        <Button onClick={this.onDeleteUpload}>Delete</Button>
       </div>
     )
   }
