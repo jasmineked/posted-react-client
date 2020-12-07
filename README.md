@@ -76,6 +76,18 @@ Building a file storage app that allows user upload/view/edit/delete files
 
 - - - -
 
+
+## File Storage API
+| HTTP Method   | URL Path     | Result            |
+|:--------------|:-------------|:------------------|
+| GET           | /home       | index of uplods    |
+| GET           | /uploads/`:id` | show single upload  |
+| POST          | /uploads       | create upload       |
+| PATCH         | /uploads/`:id` | update upload       |
+| DELETE        | /uploads/`:id` | delete upload      |
+
+- - - -
+
 ### Unsolved Problems 
 
 - We'd like to make the application more user friendly and professionally styled
