@@ -38,19 +38,19 @@ Building a file storage app that allows user upload/view/edit/delete files
 ### WireFrames 
 
 - Nathan
-</br>
+
 ![wireframe1](https://slack-imgs.com/?c=1&o1=ro&url=https%3A%2F%2Fi.imgur.com%2FG74T3poh.jpgttps://i.imgur.com/GNA3lxo.png)
 
 - J
-</br>
+
 ![wireframe2](https://i.imgur.com/pIEb9C5.png)
 
 - Chris
-</br>
+
 ![wireframe4](https://i.imgur.com/msGUx6W.jpg)
 
 - Jasmine
-</br>
+
 ![wireframe5](https://slack-imgs.com/?c=1&o1=ro&url=https%3A%2F%2Fi.imgur.com%2FvRMXl7j.jpg)
 
 - - - -
