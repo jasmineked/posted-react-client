@@ -139,7 +139,7 @@ class ShowUpload extends Component {
           </div>
         )}
         <h1>Update File</h1>
-        <Form onSubmit={this.onUpdateUpload}>
+        <Form>
           <label> File Name </label>
           <input className="form-control"
             placeholder="File Name"
@@ -155,7 +155,7 @@ class ShowUpload extends Component {
             onChange={this.handleInputChange}
           />
           <br/>
-          <Button type="submit">Submit</Button>
+          <Button onClick={this.onUpdateUpload}>Submit</Button>
         </Form>
         <Button onClick={this.onDeleteUpload}>Delete</Button>
       </div>
