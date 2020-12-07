@@ -18,24 +18,33 @@ class ShowUpload extends Component {
     this.state = {
       form: {
         name: '',
-        tag: '',
-        _id: ''
+        tag: ''
       },
-      deleted: false
+      deleted: false,
+      updated: false
     }
   }
 
+  // componentDidMount () {
+  //   showUpload(this.props.user, this.props.match.params.id)
+  //     .then(response => {
+  //       this.setState(prevState => {
+  //         console.log('what is response.data is', response.data)
+  //         // changed response.data.file => response.data.upload
+  //         const updatedData = Object.assign({}, prevState.form, response.data.file)
+  //         return { form: updatedData }
+  //       })
+  //     })
+  //     .catch(console.error)
+  // }
   componentDidMount () {
     showUpload(this.props.user, this.props.match.params.id)
       .then(response => {
-        this.setState(prevState => {
-          console.log('what is response.data is', response.data)
-          const updatedData = Object.assign({}, prevState.form, response.data.file)
-          return { form: updatedData }
-        })
+        this.setState({ form: response.data.file })
       })
       .catch(console.error)
   }
+
   handleInputChange = (event, props) => {
     event.persist()
     console.log('event.target.value/name', event.target.name, event.target.value)
@@ -73,7 +82,6 @@ class ShowUpload extends Component {
           variant: 'danger'
         })
       })
-    // const data = new FormData()
   }
 
   onUpdateUpload = (event) => {
@@ -88,18 +96,21 @@ class ShowUpload extends Component {
 
     const { msgAlert, history, user } = this.props
     const { _id } = this.state.form
-    console.log('this is data', data)
+    console.log('this is id', _id)
 
     updateUpload(data, user, _id)
       .then((response) => {
         console.log('this is response', response)
         return msgAlert({
           heading: 'Successfully Updated',
-          message: 'Updated File:' + ' ' + response.data.name,
+          message: 'Updated File:' + ' ' + response.data.form.name,
           variant: 'success'
         })
       })
       .then(() => history.push('/home'))
+      .then(response => {
+        this.setState({ updated: true })
+      })
       .catch(console.error)
   }
   //
@@ -115,6 +126,9 @@ class ShowUpload extends Component {
   // })
   // .catch(console.error)
   render () {
+    // if (this.state.updated) {
+    //   return <Redirect to={`/uploads/${this.props.match.params.id}`}/>
+    // }
     return (
       <div>
         <h1>Update/Delete Page</h1>

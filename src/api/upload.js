@@ -16,7 +16,7 @@ export const createUpload = (data, user) => {
 // UPDATE
 export const updateUpload = (data, user, id) => {
   return axios({
-    method: 'POST',
+    method: 'PATCH',
     url: apiUrl + '/uploads/' + id,
     headers: {
       Authorization: `Token token=${user.token}`
