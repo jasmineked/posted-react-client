@@ -69,15 +69,6 @@ class CreateUpload extends Component {
         })
       })
   }
-  // axios({
-  //   url: `${apiUrl}/uploads`,
-  //   method: 'POST',
-  //   data: { upload: this.state.upload }
-  // })
-  //   .then(res => {
-  //     this.setState({ createdId: res.data.upload._id })
-  //   })
-  //   .catch(console.error)
 
   render () {
     if (this.state.createdID) {
