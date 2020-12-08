@@ -98,7 +98,7 @@ class ShowUpload extends Component {
     const { _id } = this.state.form
     console.log('this is id', _id)
 
-    updateUpload(data, user, _id)
+    updateUpload(this.state.form, user, _id)
       .then((response) => {
         console.log('this is response', response)
         return msgAlert({
