@@ -47,7 +47,6 @@ class CreateUpload extends Component {
     // Pass user and data to createUpload
     createUpload(data, user)
       .then((response) => {
-        console.log('this is response', response)
         return msgAlert({
           heading: 'Successfully Posted',
           message: 'Uploaded File:' + ' ' + response.data.upload.name,
