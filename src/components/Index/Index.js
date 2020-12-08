@@ -20,7 +20,6 @@ class IndexUpload extends React.Component {
     // axios.get(apiUrl + '/uploads')
     indexUploads(this.props.user)
       .then(response => {
-        console.log('response: ', response)
         this.setState({
           isLoaded: true,
           uploads: response.data.files
@@ -63,7 +62,6 @@ class IndexUpload extends React.Component {
     let jsx
     if (this.state.isLoaded === false) {
       jsx = <img alt="loading gif" src="https://automotiverepairlumberton.com/Content/images/loading.gif" />
-      console.log('this.state.uploads: ', this.state.uploads)
     } else if (this.state.uploads.length === 0) {
       jsx = <p>No uploads, please add one.</p>
     } else {

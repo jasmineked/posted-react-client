@@ -25,18 +25,6 @@ class ShowUpload extends Component {
     }
   }
 
-  // componentDidMount () {
-  //   showUpload(this.props.user, this.props.match.params.id)
-  //     .then(response => {
-  //       this.setState(prevState => {
-  //         console.log('what is response.data is', response.data)
-  //         // changed response.data.file => response.data.upload
-  //         const updatedData = Object.assign({}, prevState.form, response.data.file)
-  //         return { form: updatedData }
-  //       })
-  //     })
-  //     .catch(console.error)
-  // }
   componentDidMount () {
     showUpload(this.props.user, this.props.match.params.id)
       .then(response => {
@@ -47,7 +35,7 @@ class ShowUpload extends Component {
 
   handleInputChange = (event, props) => {
     event.persist()
-    console.log('event.target.value/name', event.target.name, event.target.value)
+    // console.log('event.target.value/name', event.target.name, event.target.value)
     this.setState(prevState => {
       const updatedField = {
         [event.target.name]: event.target.value
@@ -63,9 +51,8 @@ class ShowUpload extends Component {
     const { msgAlert, history, user } = this.props
     const { _id } = this.state.form
 
-    console.log('this is id', _id)
+    // console.log('this is id', _id)
     deleteUpload(user, _id)
-      .then(console.log)
       .then(res => {
         this.setState({ deleted: true })
       })
@@ -75,13 +62,12 @@ class ShowUpload extends Component {
         variant: 'success'
       }))
       .then(() => history.push('/home'))
-      .catch(error => {
-        msgAlert({
-          heading: 'Delete Failed with error: ' + error.message,
-          message: 'Delete failed',
-          variant: 'danger'
-        })
-      })
+      .catch(() => msgAlert({
+        heading: 'Unable To Delete',
+        message: 'You Do Not Own This File',
+        variant: 'danger'
+      }))
+      .then(() => history.push('/home'))
   }
 
   onUpdateUpload = (event) => {
@@ -90,45 +76,32 @@ class ShowUpload extends Component {
     const data = new FormData()
     // taking the data from the component state
     // and append it to the data formdata object
-    console.log('state.form', this.state.form)
+    // console.log('state.form', this.state.form)
     data.append('name', this.state.form.name)
     data.append('tag', this.state.form.tag)
 
     const { msgAlert, history, user } = this.props
     const { _id } = this.state.form
-    console.log('this is id', _id)
 
     updateUpload(this.state.form, user, _id)
-      .then((response) => {
-        console.log('this is response', response)
-        return msgAlert({
-          heading: 'Successfully Updated',
-          message: 'Updated File:' + ' ' + response.data.form.name,
-          variant: 'success'
-        })
-      })
+      .then(() => msgAlert({
+        heading: 'Successfully Updated',
+        message: 'Updated',
+        variant: 'success'
+      }))
       .then(() => history.push('/home'))
       .then(response => {
         this.setState({ updated: true })
       })
-      .catch(console.error)
+      .catch(() => msgAlert({
+        heading: 'Unable To Update',
+        message: 'You Do Not Own This File',
+        variant: 'danger'
+      }))
+      .then(() => history.push('/home'))
   }
-  //
-  // .then(() => msgAlert({
-  //   heading: 'Successfully Deleted',
-  //   message: 'File Delete Success',
-  //   variant: 'success'
-  // }))
-  // .then(() => history.push('/home'))
-  //
-  // .then(res => {
-  //   this.setState({ deleted: true })
-  // })
-  // .catch(console.error)
+
   render () {
-    // if (this.state.updated) {
-    //   return <Redirect to={`/uploads/${this.props.match.params.id}`}/>
-    // }
     return (
       <div>
         <h1>Update/Delete Page</h1>
@@ -157,6 +130,7 @@ class ShowUpload extends Component {
           <br/>
           <Button onClick={this.onUpdateUpload}>Submit</Button>
         </Form>
+        <br/>
         <Button onClick={this.onDeleteUpload}>Delete</Button>
       </div>
     )

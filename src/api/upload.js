@@ -26,7 +26,6 @@ export const updateUpload = (data, user, id) => {
 }
 // DELETE
 export const deleteUpload = (user, id) => {
-  console.log('happening')
   return axios({
     url: apiUrl + '/uploads/' + id,
     method: 'DELETE',
