@@ -28,35 +28,6 @@ class IndexUpload extends React.Component {
       .catch(console.error)
   }
 
-  // onDeleteUpload = (event) => {
-  //   event.preventDefault()
-  //   const { msgAlert, history, user } = this.props
-  //
-  //   const data = new FormData()
-  //
-  //   deleteUpload(data, user)
-  // event.preventDefault()
-  // axios({
-  //   url: `${apiUrl}/events/${this.props.id}`,
-  //   method: 'DELETE'
-  // })
-
-  // .then(res => {
-  //   this.setState({ deleted: true })
-  // })
-  // .then(() => msgAlert({
-  //   heading: 'Successfully Deleted',
-  //   message: 'File Delete Success',
-  //   variant: 'success'
-  // }))
-  // .then(() => history.push('/home'))
-  // axios.delete(apiUrl + '/uploads/' + this.props.match.params.id)
-  // .then(res => {
-  //   this.setState({ deleted: true })
-  // })
-  //     .catch(console.error)
-  // }
-
   render () {
     const { history } = this.props
     let jsx
@@ -65,16 +36,6 @@ class IndexUpload extends React.Component {
     } else if (this.state.uploads.length === 0) {
       jsx = <p>No uploads, please add one.</p>
     } else {
-      // jsx = (
-      //   <ul>
-      //     {this.state.uploads.map(upload => {
-      //       return <li key={upload._id}>{upload.name} {upload.tag}
-      //         {upload.upload}
-      //         <Link to={'/uploadsindex/' + upload._id}>{upload.name} {upload.tag} {upload.upload}</Link>
-      //       </li>
-      //     })}
-      //   </ul>
-      // )
       jsx = (
         <div className="container">
           <div className="col-md">
