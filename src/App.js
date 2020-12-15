@@ -10,6 +10,9 @@ import SignIn from './components/SignIn/SignIn'
 import SignOut from './components/SignOut/SignOut'
 import ChangePassword from './components/ChangePassword/ChangePassword'
 import CreateUpload from './components/Create/Create'
+import ViewProfile from './components/Show/ViewProfile'
+import IndexProfile from './components/Index/IndexProfile'
+import ProfileCreation from './components/Create/CreateProfile'
 import IndexUploads from './components/Index/Index'
 import ShowUpload from './components/Show/Show'
 
@@ -78,6 +81,15 @@ class App extends Component {
           )} />
           <AuthenticatedRoute user={user} path='/uploads/:id' render={() => (
             <ShowUpload msgAlert={this.msgAlert} user={user} />
+          )} />
+          <AuthenticatedRoute user={user} path='/profiles/:id' render={() => (
+            <ViewProfile msgAlert={this.msgAlert} user={user} />
+          )} />
+          <AuthenticatedRoute user={user} path='/profiles' render={() => (
+            <IndexProfile msgAlert={this.msgAlert} user={user} />
+          )} />
+          <AuthenticatedRoute user={user} path='/profiles' render={() => (
+            <ProfileCreation msgAlert={this.msgAlert} user={user} />
           )} />
         </main>
       </Fragment>
