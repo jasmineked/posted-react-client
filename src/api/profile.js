@@ -5,7 +5,7 @@ import axios from 'axios'
 export const createProfile = (user, data) => {
   return axios({
     method: 'POST',
-    url: apiUrl + '/profiles',
+    url: apiUrl + '/profiles/',
     headers: {
       'Authorization': `Token token=${user.token}`
     },
@@ -13,10 +13,10 @@ export const createProfile = (user, data) => {
   })
 }
 // UPDATE
-export const updateProfile = (user, profile) => {
+export const updateProfile = (user, profile, id) => {
   return axios({
     method: 'PATCH',
-    url: apiUrl + '/profiles/' + profile.Id,
+    url: apiUrl + '/update-profile/' + id,
     headers: {
       Authorization: `Token token=${user.token}`
     },

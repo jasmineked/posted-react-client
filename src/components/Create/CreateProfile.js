@@ -4,7 +4,7 @@ import { createProfile } from '../../api/profile'
 // import Form from 'react-bootstrap/Form'
 // import Button from 'react-bootstrap/Button'
 // add redirect to home
-class ProfileCreation extends Component {
+class CreateProfile extends Component {
   constructor (props) {
     super(props)
     this.state = {
@@ -35,18 +35,17 @@ class ProfileCreation extends Component {
       createProfile(user, this.state.profile)
         .then((res) => {
           this.setState({ createdId: res.data.profile._id })
-          console.log(res.data.profile._id)
         })
         .then(() => {
           msgAlert({
-            heading: 'Profile Created Successfully ',
+            heading: 'Profile Created Successfully ' + this.state.profile.username,
             message: 'thsis it',
             variant: 'success'
           })
         })
         .catch((err) => {
           msgAlert({
-            heading: 'Profile Creation Failed',
+            heading: 'Profile Creation Failed, try again!',
             message: 'Try again. Error: ' + err.message,
             variant: 'danger'
           })
@@ -73,4 +72,4 @@ class ProfileCreation extends Component {
     }
 }
 
-export default withRouter(ProfileCreation)
+export default withRouter(CreateProfile)
