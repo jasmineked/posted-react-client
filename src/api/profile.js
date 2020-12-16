@@ -13,14 +13,14 @@ export const createProfile = (user, data) => {
   })
 }
 // UPDATE
-export const updateProfile = (user, profile) => {
+export const updateProfile = (user, data, profileId) => {
   return axios({
     method: 'PATCH',
-    url: apiUrl + '/profiles/' + profile.Id,
+    url: apiUrl + '/profiles/' + profileId,
     headers: {
       Authorization: `Token token=${user.token}`
     },
-    profile
+    data: { profile: profileId }
   })
 }
 // DELETE
