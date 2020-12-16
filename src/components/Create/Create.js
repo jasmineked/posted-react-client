@@ -43,7 +43,6 @@ class CreateUpload extends Component {
     data.append('upload', this.state.form.upload)
     // getting user from the props
     const { msgAlert, history, user } = this.props
-
     // Pass user and data to createUpload
     createUpload(data, user)
       .then((response) => {
