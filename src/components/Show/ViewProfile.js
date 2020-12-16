@@ -16,7 +16,6 @@ const ViewProfile = (props) => {
 
     showProfile(user, match.params.id)
       .then(res => {
-        console.log(res)
         setProfile(res.data.profile)
       })
       .then(() => {
@@ -39,8 +38,8 @@ const ViewProfile = (props) => {
     deleteProfile(user, match.params.id)
       .then(() => {
         msgAlert({
-          heading: 'Profile Deleted',
-          message: 'Back to the list of profiles that exist',
+          heading: profile.username + 'deleted',
+          message: 'should go back to index',
           variant: 'success'
         })
       })
@@ -61,7 +60,7 @@ const ViewProfile = (props) => {
         <div>
           <h2>{profile.username}</h2>
           <button onClick={handleDelete}>Delete</button>
-          <Link to={'/profiles/' + profile._id}>Update Profile</Link>
+          <Link to={'/update-profile/' + profile._id}>Update Profile</Link>
         </div>
       ) : 'Loading...'}
     </div>

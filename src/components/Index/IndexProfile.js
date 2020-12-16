@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 
 import { indexProfile } from '../../api/profile'
 
@@ -7,7 +7,7 @@ class IndexProfile extends Component {
   constructor () {
     super()
     this.state = {
-      profileArray: null
+      profileArray: []
     }
   }
 
@@ -36,22 +36,22 @@ class IndexProfile extends Component {
   }
 
   render () {
-    if (!this.state.profiles) {
+    if (!this.state.profileArray) {
       return (
-        'Loading...'
+        'why cant i console.log ' + this.state.profile
       )
-    } else if (this.state.profiles.length === 0) {
+    } else if (this.state.profileArray.length === 0) {
       return (
-        'No movies to display :('
+        ':|'
       )
     } else {
       return (
         <div>
-          {this.state.profile.map(profile => (
+          {this.state.profileArray.map(profile => (
             <Fragment key={profile._id}>
               <h2>{profile.username}</h2>
               <p></p>
-              <Link to={`/profile-show/${profile._id}`}>See More</Link>
+              <Link to={`/profiles/${profile._id}`}>See More</Link>
             </Fragment>
           ))}
         </div>
@@ -60,4 +60,4 @@ class IndexProfile extends Component {
   }
 }
 
-export default IndexProfile
+export default withRouter(IndexProfile)

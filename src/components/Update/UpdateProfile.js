@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
-import { Redirect } from 'react-router-dom'
+import { withRouter, Redirect } from 'react-router-dom'
 import { showProfile, updateProfile } from '../../api/profile'
 
-const ProfileUpdate = (props) => {
+const UpdateProfile = (props) => {
   const [profile, setProfile] = useState({ username: '' })
   const [updated, setUpdated] = useState(false)
   const { user, msgAlert, match } = props
@@ -10,7 +10,7 @@ const ProfileUpdate = (props) => {
   useEffect(() => {
     // show request
     showProfile(user, match.params.id)
-      .then(res => setMovie(res.data.profile))
+      .then(res => setProfile(res.data.profile))
       .then(() => msgAlert({
         heading: 'Profile Show Success',
         message: 'Check it out',
@@ -25,8 +25,8 @@ const ProfileUpdate = (props) => {
 
   const handleChange = (event) => {
     const updatedField = { [event.target.name]: event.target.value }
-    setProfile(oldProfile => {
-      const updatedProfile = { ...oldProfile, ...updatedField }
+    setProfile(prevProfile => {
+      const updatedProfile = { ...prevProfile, ...updatedField }
       return updatedProfile
     })
   }
@@ -34,7 +34,7 @@ const ProfileUpdate = (props) => {
   const handleSubmit = (event) => {
     event.preventDefault()
 
-    updateProfiles(user, profile, match.params.id)
+    updateProfile(user, profile, match.params.id)
       .then(() => setUpdated(true))
       // Instead of state + Redirect pairing, you can also use `history`
       // as long as the component is exported `withRouter` or is passed the
@@ -43,7 +43,7 @@ const ProfileUpdate = (props) => {
       // The `MovieShow` component uses this pattern for delete
       // .then(() => props.history.push('/profile-show/' + match.params.profileId))
       .then(() => msgAlert({
-        heading: 'Update successful',
+        heading: profile.username + ' successful',
         message: 'Nice work',
         variant: 'success'
       }))
@@ -65,10 +65,10 @@ const ProfileUpdate = (props) => {
       <h1>Update Profile</h1>
       <form onSubmit={handleSubmit}>
         <input
-          placeholder="Profile Title Here"
+          placeholder="Username Here"
           value={profile.username}
           onChange={handleChange}
-          name="title"
+          name="username"
         />
         <button type="submit">Update Profile</button>
       </form>
@@ -76,4 +76,4 @@ const ProfileUpdate = (props) => {
   )
 }
 
-export default ProfileUpdate
+export default withRouter(UpdateProfile)
