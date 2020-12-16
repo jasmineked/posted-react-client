@@ -16,7 +16,7 @@ export const createProfile = (user, data) => {
 export const updateProfile = (user, profile) => {
   return axios({
     method: 'PATCH',
-    url: apiUrl + '/profiles/' + profile.id,
+    url: apiUrl + '/profiles/' + profile.Id,
     headers: {
       Authorization: `Token token=${user.token}`
     },
