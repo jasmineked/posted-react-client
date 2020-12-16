@@ -5,7 +5,7 @@ import axios from 'axios'
 export const createProfile = (user, data) => {
   return axios({
     method: 'POST',
-    url: apiUrl + '/profiles',
+    url: apiUrl + '/profiles/',
     headers: {
       'Authorization': `Token token=${user.token}`
     },
