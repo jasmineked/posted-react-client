@@ -18,7 +18,7 @@ export const updateProfile = (user, data, profileId) => {
     method: 'PATCH',
     url: apiUrl + '/profiles/' + profileId,
     headers: {
-      Authorization: `Token token=${user.token}`
+      'Authorization': `Token token=${user.token}`
     },
     data: { profile: profileId }
   })
