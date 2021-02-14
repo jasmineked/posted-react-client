@@ -1,6 +1,6 @@
 let apiUrl
 const apiUrls = {
-  production: 'https://glacial-castle-84828.herokuapp.com/',
+  production: 'https://git.heroku.com/fathomless-bayou-16339.git',
   development: 'http://localhost:4741'
 }
 
